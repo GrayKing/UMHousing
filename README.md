@@ -5,11 +5,15 @@ This is a python script for monitoring Northwood apartments. Currently, I use [`
 
 ### Getting started
 
-Before executing the following commands, please open `HousingMonitor.py` and set pushbullet access token and necessary device name.
-
 ```bash
 $ git clone https://github.com/h1994st/UMHousing.git
 $ cd UMHousing
+$ cp conf.json.example conf.json
+```
+
+Before executing the following commands, please set pushbullet access token and necessary device name in `conf.json` at first.
+
+```bash
 $ sudo pip install -r requirements.txt  # Install requirements
 $ python HousingMonitor.py  # Run
 ```

@@ -5,7 +5,9 @@
 # @Link    : http://h1994st.com
 # @Version : 1.0
 
+import os
 import sys
+import json
 import time
 import getpass
 from pprint import pprint
@@ -24,33 +26,48 @@ SEARCH_ROOM_URL = 'https://studentweb.housing.umich.edu/SelectRoomResults.asp'
 
 NO_RESULT_TEXT = 'There are no rooms available that match your search.'
 
-# Please refer to related document on 'pushbullet.com'
-PUSHBULLET_API_KEY = None  # Please set your own pushbullet access token
-PUSHBULLET_DEVICE_NAME = None  # Please set your own device name
-
-if PUSHBULLET_API_KEY is None:
-    print >> sys.stderr, 'Please set your own pushbullet access token'
-    sys.exit(1)
-
-try:
-    pb = Pushbullet(PUSHBULLET_API_KEY)
-except pushbullet.errors.InvalidKeyError:
-    print >> sys.stderr, 'Wrong api key!'
-    sys.exit(1)
-
-if PUSHBULLET_DEVICE_NAME is None:
-    print >> sys.stderr, 'Please set your own device name'
-    sys.exit(1)
-
-try:
-    device = pb.get_device(PUSHBULLET_DEVICE_NAME)
-except pushbullet.errors.InvalidKeyError:
-    print >> sys.stderr, 'Wrong device name!'
-    device_names = [device.nickname for device in pb.devices]
-    print >> sys.stderr, 'Please select from:', ','.join(device_names)
-    sys.exit(1)
-
 session_requests = requests.session()
+
+
+def init_device():
+    if not os.path.exists('conf.json'):
+        conf = {
+            'pushbullet_access_token': '',
+            'device_name': ''
+        }
+        print >> sys.sys.stderr, 'Please set "conf.json" at first'
+        sys.exit(1)
+
+    with open('conf.json', 'r') as fp:
+        conf = json.load(fp)
+
+    # Please refer to related document on 'pushbullet.com'
+    access_token = conf.get('pushbullet_access_token', None)
+    device_name = conf.get('device_name', None)
+
+    if access_token is None:
+        print >> sys.stderr, 'Please set your own pushbullet access token'
+        sys.exit(1)
+
+    try:
+        pb = Pushbullet(access_token)
+    except pushbullet.errors.InvalidKeyError:
+        print >> sys.stderr, 'Wrong api key!'
+        sys.exit(1)
+
+    if device_name is None:
+        print >> sys.stderr, 'Please set your own device name'
+        sys.exit(1)
+
+    try:
+        device = pb.get_device(device_name)
+    except pushbullet.errors.InvalidKeyError:
+        print >> sys.stderr, 'Wrong device name!'
+        device_names = [device.nickname for device in pb.devices]
+        print >> sys.stderr, 'Please select from:', ','.join(device_names)
+        sys.exit(1)
+
+    return device
 
 
 def search():
@@ -140,6 +157,9 @@ def extract_info_from_result(result):
 
 
 def main():
+    device = init_device()
+    print device
+
     username = raw_input('Uniqname: ')
     while username.strip() == '':
         print >> sys.stderr, 'Uniqname cannot be empty.'

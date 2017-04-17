@@ -161,7 +161,7 @@ def main():
                         department['Available Space'])) for department in departments]
 
                 device.push_note(
-                    'results', 'NORTHWOOD!!!!!!!\n' + '\n'.join(simple_info))
+                    'NORTHWOOD!!!!!!!', '\n'.join(simple_info))
 
                 print 'Sleeping 60 minutes...'
                 time.sleep(60 * 60)

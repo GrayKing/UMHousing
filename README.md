@@ -7,18 +7,27 @@ Currently, I use [`Pushbullet`](https://www.pushbullet.com/) to push notificatio
 
 ### Getting started
 
-```bash
-$ git clone https://github.com/h1994st/UMHousing.git
-$ cd UMHousing
-$ cp conf.json.example conf.json
-```
+_(All the commands can work well in both Ubuntu and macOS.)_
 
-Before executing the following commands, please set pushbullet access token and necessary device name in `conf.json` at first.
+1. At first, you can use Git to clone this repository or click [here](https://github.com/h1994st/UMHousing/archive/master.zip) to directly download the script.
 
-```bash
-$ sudo pip install -r requirements.txt  # Install requirements
-$ python HousingMonitor.py  # Run
-```
+    ```bash
+    $ git clone https://github.com/h1994st/UMHousing.git
+    ```
+
+2. Then, please enter the folder and set the configuration file according to the template.
+
+    ```bash
+    $ cd UMHousing
+    $ cp conf.json.example conf.json
+    ```
+
+3. Before executing the following commands, please set pushbullet access token and necessary device name in `conf.json` at first.
+
+    ```bash
+    $ sudo pip install -r requirements.txt  # Install requirements
+    $ python HousingMonitor.py  # Run
+    ```
 
 ### Search parameters
 

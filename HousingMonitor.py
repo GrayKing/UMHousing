@@ -29,15 +29,42 @@ NO_RESULT_TEXT = 'There are no rooms available that match your search.'
 session_requests = requests.session()
 
 
+class VoidDevice(object):
+    """A fake device."""
+    def __init__(self):
+        super(VoidDevice, self).__init__()
+
+    def push_note(self, *args, **kwargs):
+        pass
+
+
 def init_device():
+    """Initialize the device that receives notification."""
+
+    # Notification option
+    ans = raw_input('Do you need Pushbullet notification? (Y/n): ')
+    while ans.strip().upper() not in ['Y', 'N']:
+        ans = raw_input('Do you need Pushbullet notification? (Y/n): ')
+
+    if ans.strip().upper() == 'N':
+        # Do not need notification
+        return VoidDevice()
+
+    # Check configuration file 'conf.json'
     if not os.path.exists('conf.json'):
         conf = {
             'pushbullet_access_token': '',
             'device_name': ''
         }
-        print >> sys.sys.stderr, 'Please set "conf.json" at first'
+
+        # Dump template file
+        with open('conf.json', 'w') as fp:
+            json.dump(conf, fp)
+
+        print >> sys.sys.stderr, 'Please set "conf.json" at first.'
         sys.exit(1)
 
+    # Load configuration file
     with open('conf.json', 'r') as fp:
         conf = json.load(fp)
 
@@ -45,8 +72,9 @@ def init_device():
     access_token = conf.get('pushbullet_access_token', None)
     device_name = conf.get('device_name', None)
 
+    # Check access token
     if access_token is None:
-        print >> sys.stderr, 'Please set your own pushbullet access token'
+        print >> sys.stderr, 'Please set your own pushbullet access token.'
         sys.exit(1)
 
     try:
@@ -55,8 +83,9 @@ def init_device():
         print >> sys.stderr, 'Wrong api key!'
         sys.exit(1)
 
+    # Check device name
     if device_name is None:
-        print >> sys.stderr, 'Please set your own device name'
+        print >> sys.stderr, 'Please set your own device name.'
         sys.exit(1)
 
     try:
@@ -64,8 +93,12 @@ def init_device():
     except pushbullet.errors.InvalidKeyError:
         print >> sys.stderr, 'Wrong device name!'
         device_names = [device.nickname for device in pb.devices]
-        print >> sys.stderr, 'Please select from:', ','.join(device_names)
+        print >> sys.stderr, 'Please select from: %s.' % (
+            ','.join(device_names))
         sys.exit(1)
+
+    # Print the information of the device
+    print device
 
     return device
 
@@ -173,7 +206,6 @@ def login(username, password):
 
 def main():
     device = init_device()
-    print device
 
     username = raw_input('Uniqname: ')
     while username.strip() == '':

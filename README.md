@@ -5,7 +5,7 @@ This is a python script for monitoring Northwood apartments. You should know tha
 
 Currently, I use [`Pushbullet`](https://www.pushbullet.com/) to push notifications to mobile devices (e.g., iPhone). An alternative notification solution is IFTTT [Maker Webhooks](https://ifttt.com/maker_webhooks). You can also replace this part of codes with other solutions (e.g., email, desktop notification, etc.).
 
-### Getting started
+## Getting started
 
 _(All the commands can work well in both Ubuntu and macOS.)_
 
@@ -15,23 +15,30 @@ _(All the commands can work well in both Ubuntu and macOS.)_
     $ git clone https://github.com/h1994st/UMHousing.git
     ```
 
-2. Then, please enter the folder and set the configuration file according to the template.
+2. Then, please enter the folder and set the configuration file according to the template, if you need Pushbullet ___notification___.
 
     ```bash
     $ cd UMHousing
-    $ cp conf.json.example conf.json
+    $ cp conf.json.example conf.json  # Ignore this command, if you do not need notification
     ```
 
-3. Before executing the following commands, please set Pushbullet __access token__ and necessary __device name__ (refer to the [document](https://docs.pushbullet.com/#api-quick-start) of Pushbullet) in `conf.json` at first.
+    To set Pushbullet ___access token___ and necessary ___device name___ in `conf.json`, please refer to the [document](https://docs.pushbullet.com/#api-quick-start) of Pushbullet.
+
+3. Install dependencies.
 
     ```bash
     $ sudo pip install -r requirements.txt  # Install requirements
+    ```
+
+3. Run the script.
+
+    ```bash
     $ python HousingMonitor.py  # Run
     ```
 
-### Search parameters
+## Search parameters
 
-The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes start from [line 102](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L102). There are comments which show the valid parameter values.
+The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes start from [line 135](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L135) of `HousingMonitor.py`. There are comments which show the valid parameter values.
 
 ```python
 ...

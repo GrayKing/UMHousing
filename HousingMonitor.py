@@ -24,6 +24,7 @@ HOUSING_PAGE_URL = 'https://studentweb.housing.umich.edu'
 APARTMENT_SELECTION_PAGE_URL = 'https://studentweb.housing.umich.edu/SelectRoom.asp?Function=6164'
 SEARCH_ROOM_URL = 'https://studentweb.housing.umich.edu/SelectRoomResults.asp'
 
+HOUSING_PATE_SECTION_TEXT = 'Graduate and Family Residences 2017-2018'
 NO_RESULT_TEXT = 'There are no rooms available that match your search.'
 
 session_requests = requests.session()
@@ -196,8 +197,17 @@ def login(username, password):
     print 'Login'
     result = session_requests.post(
         LOGIN_POST_URL, data=payload)
-
     if result.status_code / 100 != 2:
+        print 'Failed'
+        return False
+
+    # Check login
+    result = session_requests.get(HOUSING_PAGE_URL)
+    if result.status_code / 100 != 2:
+        print 'Failed'
+        return False
+
+    if result.text.find(HOUSING_PATE_SECTION_TEXT) == -1:
         print 'Failed'
         return False
 
@@ -234,6 +244,8 @@ def main():
             else:
                 print 'Sleeping 30 minutes...'
                 time.sleep(30 * 60)
+    else:
+        print >> sys.stderr, 'Please check your uniqname and password.'
 
 
 if __name__ == '__main__':

@@ -22,7 +22,7 @@ _(All the commands can work well in both Ubuntu and macOS.)_
     $ cp conf.json.example conf.json
     ```
 
-3. Before executing the following commands, please set pushbullet access token and necessary device name in `conf.json` at first.
+3. Before executing the following commands, please set Pushbullet __access token__ and necessary __device name__ (refer to the [document](https://docs.pushbullet.com/#api-quick-start) of Pushbullet) in `conf.json` at first.
 
     ```bash
     $ sudo pip install -r requirements.txt  # Install requirements
@@ -31,7 +31,7 @@ _(All the commands can work well in both Ubuntu and macOS.)_
 
 ### Search parameters
 
-The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes start from [line 74](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L74). There are comments which show the valid parameter values.
+The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes start from [line 102](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L102). There are comments which show the valid parameter values.
 
 ```python
 ...

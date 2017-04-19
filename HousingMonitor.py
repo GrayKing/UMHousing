@@ -70,6 +70,34 @@ def init_device():
     return device
 
 
+def extract_info_from_html_elems(elems):
+    # Cut table header
+    elems = elems[1:]
+
+    departments = []
+    for elem in elems:
+        vals = elem.cssselect('td')
+        vals[0] = vals[0].cssselect('a')[0]
+
+        department = {
+            'Name': vals[0].text,
+            'link': vals[0].get('href'),
+            'Area': vals[1].text,
+            'Apartment Type': vals[2].text,
+            'Contract Start Date': vals[3].text,
+            'Square Footage': vals[4].text,
+            'Environment': vals[5].text,
+            'Air Conditioning': vals[6].text,
+            'Furniture Type': vals[7].text,
+            'Bedroom Dimensions': vals[8].text,
+            'Available Space': vals[9].text
+        }
+
+        departments.append(department)
+
+    return departments
+
+
 def search():
     payload = {
         'fld24526': 49,  # Ready to process: {49(Yes)}
@@ -96,8 +124,23 @@ def search():
         print 'No result'
         return None
 
+    # Parse html file
+    tree = html.fromstring(result.text)
+
+    # Select apartment list
+    elems = tree.cssselect('table.DataTable tr')
+
+    # Check the number of elements (at lease one row)
+    if len(elems) < 1:
+        # No result
+        print 'No result (false positive)'
+        return None
+
+    # Extract from html elements
+    departments = extract_info_from_html_elems(elems)
+
     print 'Results!'
-    return result
+    return departments
 
 
 def login(username, password):
@@ -128,34 +171,6 @@ def login(username, password):
     return True
 
 
-def extract_info_from_result(result):
-    tree = html.fromstring(result.text)
-    elems = tree.cssselect('table.DataTable tr')[1:]
-
-    departments = []
-    for elem in elems:
-        vals = elem.cssselect('td')
-        vals[0] = vals[0].cssselect('a')[0]
-
-        department = {
-            'Name': vals[0].text,
-            'link': vals[0].get('href'),
-            'Area': vals[1].text,
-            'Apartment Type': vals[2].text,
-            'Contract Start Date': vals[3].text,
-            'Square Footage': vals[4].text,
-            'Environment': vals[5].text,
-            'Air Conditioning': vals[6].text,
-            'Furniture Type': vals[7].text,
-            'Bedroom Dimensions': vals[8].text,
-            'Available Space': vals[9].text
-        }
-
-        departments.append(department)
-
-    return departments
-
-
 def main():
     device = init_device()
     print device
@@ -169,10 +184,9 @@ def main():
 
     if login(username, pwd):
         while True:
-            res = search()
+            departments = search()
 
-            if res is not None:
-                departments = extract_info_from_result(res)
+            if departments is not None:
                 pprint(departments)
 
                 simple_info = [(

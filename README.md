@@ -5,7 +5,7 @@ This is a Python script for monitoring Northwood apartments. You should know tha
 
 Currently, this script uses [`Pushbullet`](https://www.pushbullet.com/) to push notifications to mobile devices (e.g., iPhone). An alternative notification solution is IFTTT [Maker Webhooks](https://ifttt.com/maker_webhooks). You can also replace this part of codes with other solutions (e.g., email, desktop notification, etc.).
 
-Since the probability of a successful search is very low, I cannot comprehensively test this script. Although this script can send the correct notification in time and did help me get an apartment contract, please ___DO NOT___ completely rely on this script, unless you can improve this script and confirm its effectiveness. If any errors occur while using this script, please feel free to contact me. You can either choose to submit an [issue](https://github.com/h1994st/UMHousing/issues) on Github or create a [pull request](https://github.com/h1994st/UMHousing/pulls).
+Since the probability of a successful search is very low, I cannot comprehensively test this script. Although this script can send the correct notification in time, please ___DO NOT___ completely rely on this script, unless you can improve this script and confirm its effectiveness. If any errors occur while using this script, please feel free to contact me. You can either choose to submit an [issue](https://github.com/h1994st/UMHousing/issues) on Github or create a [pull request](https://github.com/h1994st/UMHousing/pulls).
 
 ## Getting started
 

@@ -42,9 +42,9 @@ class VoidDevice(object):
 def init_device():
     """Initialize the device that receives notification."""
 
-    # Notification option
+    # Notification option (Default: Y)
     ans = raw_input('Do you need Pushbullet notification? (Y/n): ')
-    while ans.strip().upper() not in ['Y', 'N']:
+    while ans.strip().upper() not in ['Y', '', 'N']:
         ans = raw_input('Do you need Pushbullet notification? (Y/n): ')
 
     if ans.strip().upper() == 'N':

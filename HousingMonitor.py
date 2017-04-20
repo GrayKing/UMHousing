@@ -115,7 +115,6 @@ def extract_info_from_html_elems(elems):
 
         department = {
             'Name': vals[0].text,
-            'link': vals[0].get('href'),
             'Area': vals[1].text,
             'Apartment Type': vals[2].text,
             'Contract Start Date': vals[3].text,

@@ -40,7 +40,7 @@ _(All the commands can work well in both Ubuntu and macOS.)_
 
 ## Search parameters
 
-The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes start from [line 136](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L136) of `HousingMonitor.py`. There are comments which show the valid parameter values.
+The default parameters are hard coded in [`HousingMonitor.py`](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py). In the future, they may be converted to command line parameters or a configuration file. Related codes, as well as the comments, start from [line 136](https://github.com/h1994st/UMHousing/blob/master/HousingMonitor.py#L136) of `HousingMonitor.py`.
 
 ```python
 ...

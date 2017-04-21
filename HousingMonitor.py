@@ -62,7 +62,7 @@ def init_device():
         with open('conf.json', 'w') as fp:
             json.dump(conf, fp)
 
-        print >> sys.sys.stderr, 'Please set "conf.json" at first.'
+        print >> sys.stderr, 'Please set "conf.json" at first.'
         sys.exit(1)
 
     # Load configuration file

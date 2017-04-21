@@ -9,9 +9,9 @@ Since the probability of a successful search is very low, I cannot comprehensive
 
 ## Getting started
 
-_(All the commands can work well in both Ubuntu and macOS.)_
+__Note:__ For windows users (Windows 7 and later), please use `PowerShell` instead of `cmd`.
 
-1. At first, you can use Git to clone this repository or click [here](https://github.com/h1994st/UMHousing/archive/master.zip) to directly download the script.
+1. At first, you can use Git to clone this repository or click [here](https://github.com/h1994st/UMHousing/archive/master.zip) to directly download the script. For windows user, if there is no bash shell environment, please download from the link.
 
     ```bash
     $ git clone https://github.com/h1994st/UMHousing.git
